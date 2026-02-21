@@ -1,15 +1,15 @@
+import { EntitySchema, EntityTarget } from "typeorm";
 
-export type EntityModule<T = unknown> = (... args: unknown[]) => T;
 
 export default class EntityModuleCollection
 {
     public constructor(
-        private readonly modules: Readonly<EntityModule[]> = []
+        private readonly modules: EntityTarget<any>[] = []
     ) {
 
     }
 
-    public add(... modules: EntityModule[]) 
+    public add(... modules: EntityTarget<any>[]) 
     {
         modules.push(...modules)
     }

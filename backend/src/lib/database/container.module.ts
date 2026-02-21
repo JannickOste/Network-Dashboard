@@ -1,5 +1,5 @@
 import { ContainerModule } from "inversify";
-import dataSource from "./data-source";
+import dataSource from "./src/data-source";
 import { DataSource } from "typeorm";
 
 const databaseContainerModule = new ContainerModule((bind) => {

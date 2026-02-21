@@ -1,10 +1,11 @@
-import { InversifyExpressServer } from "inversify-express-utils";
 import "reflect-metadata";
-import { getContainer } from "./lib/container/container";
+
 import { App } from "./app";
+import { getContainer } from "./lib/container";
 
 (async() => {
     const container = getContainer()
-    const app = new App(container);
+    container.bind(App).toSelf().inSingletonScope();
+    const app = container.get(App);
     await app.start();
 })()

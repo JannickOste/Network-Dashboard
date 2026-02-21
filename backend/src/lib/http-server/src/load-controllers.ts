@@ -1,6 +1,6 @@
 import path from "path";
-import loadModules from "../module-loader/load-modules";
-import { App } from "../../app";
+import loadModules from "../../module-loader/src/load-modules";
+import { App } from "../../../app";
 
 let initialized = false; 
 export default async function loadControllers(

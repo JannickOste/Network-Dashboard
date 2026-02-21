@@ -1,9 +1,11 @@
-import EntityModuleCollection, { EntityModule } from "../lib/database/entity-module";
+import { EntitySchema, EntityTarget } from "typeorm";
+import EntityModuleCollection from "../lib/database/src/entity-module";
+import { lanScannerEntityModule } from "../../lan-scanner";
 
 const collections: EntityModuleCollection[] = [
-
+    lanScannerEntityModule
 ]
 
-const entities: EntityModule[] = collections.flatMap(v => v.getAll());
+const entities: Function[] = collections.flatMap(v => v.getAll() as Function[]);
 
 export default entities;

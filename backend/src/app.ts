@@ -1,28 +1,29 @@
 import "reflect-metadata";
-import { Container } from "inversify";
-import { HttpServer } from "./lib/http-server/server";
-import dataSource from "./lib/database/data-source";
+import { Container, inject, injectable } from "inversify";
+import { HttpServer } from "./lib/http-server";
+import { DataSource } from "typeorm";
+import { getContainer } from "./lib/container";
 
+@injectable()
 export class App {
-    private server!: Readonly<HttpServer>;
-
     public static get AppRoot(): string 
     {
         return __dirname;
     }
 
     constructor(
-        container: Readonly<Container>
+        @inject(HttpServer) private server: Readonly<HttpServer>,
+        @inject(DataSource) private dataSource: Readonly<DataSource>,
     ) {
-        this.server = new HttpServer(container)
      }
 
      private async setup() 
      {
-        if(!dataSource.isInitialized) 
+        if(!this.dataSource.isInitialized) 
         {
-            await dataSource.initialize();
+            await this.dataSource.initialize();
         }
+
         this.server = await this.server.build();
      }
 

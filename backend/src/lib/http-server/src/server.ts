@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import express from "express";
-import { Container } from "inversify";
+import { Container, injectable } from "inversify";
 import { InversifyExpressServer } from "inversify-express-utils";
-import path from "path";
-import loadModules from "../module-loader/load-modules";
 import loadControllers from "./load-controllers";
+import { getContainer } from "../../container";
 
+@injectable()
 export class HttpServer {
     private server!: Readonly<InversifyExpressServer>;
     private _app!: express.Application;
@@ -18,14 +18,10 @@ export class HttpServer {
         return this._app;
     }
 
-    constructor(
-        private readonly container: Readonly<Container>
-    ) { }
-
     public async build(
 
     ): Promise<this> {
-        this.server = new InversifyExpressServer(this.container);
+        this.server = new InversifyExpressServer(getContainer());
 
         this.server.setConfig((app) => {
             app.use(express.json());
