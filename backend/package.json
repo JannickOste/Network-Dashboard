@@ -15,6 +15,8 @@
     "@types/node": "^25.3.0"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "inversify": "^6.2.2",
+    "inversify-express-utils": "^6.5.0",
+    "reflect-metadata": "^0.2.2"
   }
 }

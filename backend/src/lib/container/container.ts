@@ -14,6 +14,4 @@ export function getContainer(): Container
     }
 
     return container;
-} 
-
-export default container;
+}
