@@ -1,4 +1,4 @@
-import EntityModuleCollection, { EntityModule } from "./entity-module";
+import EntityModuleCollection, { EntityModule } from "../lib/database/entity-module";
 
 const collections: EntityModuleCollection[] = [
 

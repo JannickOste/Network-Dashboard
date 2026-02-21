@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import entities from "./entity-module.config";
+import entities from "../../config/entity-module.config";
 
 let dataSource: DataSource = new DataSource({
     type: "better-sqlite3",
