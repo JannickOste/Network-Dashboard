@@ -1,5 +1,5 @@
 import path from "path";
-import loadModules from "../../module-loader/src/load-modules";
+import loadModules from "../../global/module-loader/src/load-modules";
 import { App } from "../../../app";
 
 let initialized = false; 
