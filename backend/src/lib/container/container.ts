@@ -1,5 +1,5 @@
 import { Container } from "inversify";
-import modules from "./container.module.config";
+import modules from "../../config/container.module.config";
 
 let container: Container | null = null; 
 
