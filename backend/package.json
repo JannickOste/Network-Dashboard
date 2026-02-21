@@ -12,12 +12,14 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "@types/node": "^25.3.0"
+    "@types/node": "^25.3.0",
+    "@types/ping": "^0.4.4"
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",
     "inversify": "^6.2.2",
     "inversify-express-utils": "^6.5.0",
+    "ping": "^0.4.4",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.28"
   }

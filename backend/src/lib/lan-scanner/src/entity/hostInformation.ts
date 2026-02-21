@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, EntitySchema } from "typeorm";
 import "reflect-metadata";
 @Entity()
-export default class HostInformation extends EntitySchema {
+export default class HostInformation {
     @PrimaryGeneratedColumn()
     public id!: number;
 
