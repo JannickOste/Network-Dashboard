@@ -5,9 +5,6 @@ import { App } from "./app";
 
 (async() => {
     const container = getContainer()
-    const server = new App(container);
-
-    const app = server.build();
-
-    app.listen(3000);
+    const app = new App(container);
+    await app.start();
 })()

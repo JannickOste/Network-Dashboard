@@ -1,43 +1,30 @@
 import "reflect-metadata";
-import express from "express";
 import { Container } from "inversify";
-import { InversifyExpressServer } from "inversify-express-utils";
+import { HttpServer } from "./lib/http-server/server";
 
 export class App {
-    private server!: Readonly<InversifyExpressServer>;
-    private _app!: express.Application;
-    public get app(): Readonly<express.Application>
-    {
-        if (!this._app) {
-            throw new Error("Server not built. Call build() first.");
-        }
+    private server!: Readonly<HttpServer>;
 
-        return this._app;
+    public static get AppRoot(): string 
+    {
+        return __dirname;
     }
 
     constructor(
-        private readonly container: Readonly<Container>
-    ) { }
+        container: Readonly<Container>
+    ) {
+        this.server = new HttpServer(container)
+     }
 
-    public build(
+     private async setup() 
+     {
+        this.server = await this.server.build();
+     }
 
-    ): this {
-        this.server = new InversifyExpressServer(this.container);
-
-        this.server.setConfig((app) => {
-            app.use(express.json());
-            app.use(express.urlencoded({ extended: true }));
-        });
-
-        this._app = this.server.build();
-        return this;
-    }
-
-    public listen(
+    public async start(
         port: number = 3000
-    ): void {
-        this.app.listen(port, () => {
-            console.log(`Server started on http://localhost:${port}`);
-        });
+    ): Promise<void> {
+        await this.setup();
+        this.server.listen(port);
     }
 }
