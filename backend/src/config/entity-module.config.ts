@@ -1,6 +1,5 @@
-import { EntitySchema, EntityTarget } from "typeorm";
 import EntityModuleCollection from "../lib/database/src/entity-module";
-import { lanScannerEntityModule } from "../../lan-scanner";
+import { lanScannerEntityModule } from "../lib/lan-scanner";
 
 const collections: EntityModuleCollection[] = [
     lanScannerEntityModule
