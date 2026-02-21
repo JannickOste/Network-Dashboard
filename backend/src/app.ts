@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { Container } from "inversify";
 import { HttpServer } from "./lib/http-server/server";
+import dataSource from "./lib/database/data-source";
 
 export class App {
     private server!: Readonly<HttpServer>;
@@ -18,6 +19,10 @@ export class App {
 
      private async setup() 
      {
+        if(!dataSource.isInitialized) 
+        {
+            await dataSource.initialize();
+        }
         this.server = await this.server.build();
      }
 

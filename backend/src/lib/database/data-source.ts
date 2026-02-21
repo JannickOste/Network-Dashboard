@@ -1,0 +1,14 @@
+import "reflect-metadata";
+import { DataSource } from "typeorm";
+import entities from "./entity-module.config";
+
+let dataSource: DataSource = new DataSource({
+    type: "better-sqlite3",
+    database: "db.sqlite",
+    synchronize: false,
+    logging: true,
+    entities: [...entities],
+    migrations: ["lib/database/migrations/*.ts"],
+});;
+
+export default dataSource;

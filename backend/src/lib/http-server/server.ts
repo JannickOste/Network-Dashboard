@@ -4,7 +4,7 @@ import { Container } from "inversify";
 import { InversifyExpressServer } from "inversify-express-utils";
 import path from "path";
 import loadModules from "../module-loader/load-modules";
-import loadControllers from "./loadControllers";
+import loadControllers from "./load-controllers";
 
 export class HttpServer {
     private server!: Readonly<InversifyExpressServer>;
