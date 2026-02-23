@@ -3,14 +3,30 @@ import { HostInformationDto } from "../dto/HostInformationDto";
 import HostInformationResolver from "../resolver/HostInformationResolver";
 import { HostInformationService } from "../service/HostInformationService";
 import HostInformation from "../entity/hostInformation";
+import NetworkProbeService from "../service/NetworkProbeService";
 
 export default class NetworkInformationManager 
 {
     public constructor(
         @inject(HostInformationResolver) private readonly hostInfoResolver: HostInformationResolver,
-        @inject(HostInformationService) private readonly hostInfoService: HostInformationService
+        @inject(HostInformationService) private readonly hostInfoService: HostInformationService,
+        @inject(NetworkProbeService) private readonly networkProbeService: NetworkProbeService,
     ) { 
 
+    }
+
+    public async getUnkown(): Promise<Array<HostInformationDto>>
+    {
+        const out: HostInformationDto[] = [];
+
+        const blacklist = (await this.hostInfoService.getAllHosts())
+                        .map(v => v.ipAddress)
+
+        //TODO: change in future using configuration 
+        const items =  (await this.networkProbeService.getHosts("192.168.10.0/24"))
+                        .filter(v => v.status === "up" && !blacklist.includes(v.ipAddress))
+       
+        return items;
     }
 
     public async getAll(): Promise<Array<HostInformationDto>> 
