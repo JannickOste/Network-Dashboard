@@ -8,7 +8,8 @@ export type ModuleInfo = {
 
 export default async function loadModules(
     directory: string, 
-    matcher: string | RegExp
+    matcher: string | RegExp,
+    recursive: boolean = true
 ) {
     if(!fs.existsSync(directory))
     {
@@ -23,9 +24,12 @@ export default async function loadModules(
         const currentPath = path.join(dirent.parentPath, dirent.name)
         if(dirent.isDirectory())
         {
-            modules.push(
-                ... (await loadModules(currentPath, matcher))
-            )
+            if(recursive)
+            {
+                modules.push(
+                    ... (await loadModules(currentPath, matcher, recursive))
+                )
+            }
         }
 
         if(dirent.isFile() && (
