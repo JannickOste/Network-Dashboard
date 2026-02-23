@@ -15,10 +15,4 @@ export class GetHostsController {
   public async getHosts() {
     return await this.networkInfoManager.getAll()
   }
-
-  
-  @httpGet("/unkown")
-  public async getUnkownHosts() {
-    return await this.networkInfoManager.getUnkown()
-  }
 }
