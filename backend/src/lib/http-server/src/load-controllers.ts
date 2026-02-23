@@ -11,6 +11,6 @@ export default async function loadControllers(
     initialized = true;
     await loadModules(
         path.join(App.AppRoot, "controllers"), 
-        "route.ts"
+        /^route\.(ts|js)$/
     )
 }
