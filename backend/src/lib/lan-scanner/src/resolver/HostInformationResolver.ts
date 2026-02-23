@@ -17,7 +17,10 @@ export default class HostInformationResolver
         info: HostInformation
     ): Promise<HostInformationDto>
     {
-        let hostInfo = await this.hostProbeService.getHost(info.ipAddress);
+        let hostInfo = {
+            id: info.id,
+            ... (await this.hostProbeService.getHost(info.ipAddress))
+        }
         if(hostInfo.status === "up")
         {
             const upInfo: Partial<HostInformationDto> = {
