@@ -2,8 +2,8 @@ services:
   backend:
     build: ./backend
     container_name: backend
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     cap_add:
       - NET_RAW
       - NET_ADMIN
@@ -12,8 +12,27 @@ services:
   frontend:
     build: ./frontend
     container_name: frontend
-    ports:
-      - "8080:3000"
+    expose:
+      - "3000"
     depends_on:
       - backend
     restart: unless-stopped
+
+  proxy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

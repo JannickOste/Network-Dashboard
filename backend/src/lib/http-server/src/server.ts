@@ -21,7 +21,13 @@ export class HttpServer {
     public async build(
 
     ): Promise<this> {
-        this.server = new InversifyExpressServer(getContainer());
+        this.server = new InversifyExpressServer(
+            getContainer(),
+            null,
+            {
+                rootPath: "/api"
+            }
+        );
 
         this.server.setConfig((app) => {
             app.use(express.json());
