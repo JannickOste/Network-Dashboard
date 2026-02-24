@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/bootstrap",
-    "start": "node dist/bootstrap"
+    "start": "node dist/bootstrap",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,8 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.3.0",
-    "@types/ping": "^0.4.4"
+    "@types/ping": "^0.4.4",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",

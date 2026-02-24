@@ -37,7 +37,7 @@ export class HttpServer {
     public listen(
         port: number = 3000
     ): void {
-        this.app.listen(port, () => {
+        this.app.listen(port, "0.0.0.0", () => {
             console.log(`Server started on http://localhost:${port}`);
         });
     }
