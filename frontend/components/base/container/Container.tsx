@@ -16,5 +16,4 @@ const Container = <T extends ContainerType = "div">({
 
     return <Component {...props}>{children}</Component>
 }
-(() => (<Container><></></Container>))
 export default Container
