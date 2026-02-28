@@ -1,4 +1,18 @@
 services:
+  mariadb:
+    image: mariadb:12
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: app
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
   backend:
     build: ./backend
     container_name: backend
@@ -7,6 +21,14 @@ services:
     cap_add:
       - NET_RAW
       - NET_ADMIN
+    environment: 
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_DATABASE: app
+      DB_USER: appuser
+      DB_PASSWORD: apppassword
+    depends_on:
+      - mariadb
     restart: unless-stopped
 
   frontend:
@@ -36,3 +58,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  mariadb_data:

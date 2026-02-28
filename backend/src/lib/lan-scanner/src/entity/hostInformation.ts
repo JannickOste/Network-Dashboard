@@ -7,13 +7,9 @@ export default class HostInformation {
 
     @Column()
     public ipAddress!: string;
-
-    @Column("simple-array", {
-        transformer: {
-            to: (value: number[]) => value.join(","),
-            from: (value: string[]) =>
-                value ? value.map(v => parseInt(v)) : [],
-        },
+    
+    @Column({
+        type: "json",
     })
-    public portList: number[] = []
+    public portList: number[] = [];
 }
